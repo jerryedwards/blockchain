@@ -41,7 +41,7 @@ def read_data():
 def set_smartcore_data(file):
     print('loading smartcore data...')
     data = pd.read_excel(file, header=0)
-    smartcore_data = data[['Incident Number','Legacy Job No.','Heading','Client Reference','State','Current Priority','Raised On','Found in Version']]
+    smartcore_data = data[['Incident Number','Legacy Job No.','Heading','Client Reference','State','Current Priority','Raised On','Found in Version','Target Delivery']]
     return smartcore_data
 
 
@@ -105,7 +105,7 @@ def categorise_reconciled_data(rec):
 
 def create_excel_sheet(open_closed_data, open_open_data, closed_closed_data, unrec):
     
-    column_names = ['Smartcore INC','Sos PRB','Sos Legacy PRB','FNZ Job','Heading','Owner','Smartcore State','Sos State','Sos INC','Current Priority','Raised On','Found in Version']
+    column_names = ['Smartcore INC','Sos PRB','Sos Legacy PRB','FNZ Job','Heading','Owner','Smartcore State','Sos State','Sos INC','Current Priority','Raised On','Found in Version','Target Delivery']
 
     open_closed_data = open_closed_data[column_names]
     open_open_data = open_open_data[column_names]
@@ -130,7 +130,7 @@ smartcore_data, sostenuto_data = read_data()
 
 rec, unrec = reconcile_data(smartcore_data, sostenuto_data)
 
-rec.columns = ['Sos PRB','Sos Legacy PRB','Sos Summary','Sos State','Sos INC','Owner','Smartcore INC','FNZ Job','Heading','Smartcore PRB','Smartcore State','Current Priority','Raised On','Found in Version']
+rec.columns = ['Sos PRB','Sos Legacy PRB','Sos Summary','Sos State','Sos INC','Owner','Smartcore INC','FNZ Job','Heading','Smartcore PRB','Smartcore State','Current Priority','Raised On','Found in Version','Target Delivery']
 del rec['Smartcore PRB']
 
 # with the reconciled data, split into 3 dataframes:
